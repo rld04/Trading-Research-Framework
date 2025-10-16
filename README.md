@@ -1,6 +1,6 @@
 # 📊 MTC Trading v1.0 — Trading Research Framwork
  
-**MTC Trading v1.0** is a full-featured backtesting engine designed to model, test, and analyze trading strategies under realistic market conditions.
+**MTC Trading v1.0** is a full-featured backtesting engine built to model, test, and analyze systematic trading strategies under realistic market conditions. Using real, up-to-date market data on any listed equity, allowing users to evaluate performance across custom historical periods or the most recent market environment. Crypto coming soon.
 
 ---
 
