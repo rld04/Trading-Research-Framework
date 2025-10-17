@@ -35,11 +35,13 @@ One of the Main goals of MTC Trading v1.0 was to design a realistic framwork wer
 ---
 
 ### 🔹 Risk Management System
-A dedicated **`RiskManager`** module models position sizing and trade protection using institutional principles:
-- **Kelly-inspired sizing** based on volatility and portfolio risk limits  
-- **Stop Loss**, **Take Profit**, and **Trailing Stop** execution logic  
-- **Maximum portfolio exposure** and per-trade risk budgeting  
-- **Detailed event logging** for triggered risk events  
+The framework includes a dedicated **`RiskManager`** module designed to replicate institutional-style capital management. It controls trade sizing, exit logic, and portfolio exposure, ensuring that every strategy operates under realistic, disciplined risk conditions.
+
+Core Functions:
+- **Kelly-inspired sizing** - trade sizes adjust dynamically based on portfolio risk and market volatility. This draws on the Kelly Criterion principle: allocating more when conditions are favorable and less when risk increases, balancing long-term growth and drawdown control.
+- **Stop Loss**, **Take Profit**, and **Trailing Stop** - execution logic  
+- **Maximum Portfolio Exposure** and **Per-Trade Risk** - caping total open risk to prevent over-leverage and preserve capital during volatile markets. 
+- **Detailed event logging** - tracks all risk triggers and exits, providing full transparency for analysis and debugging.
 
 This ensures all strategies operate under controlled, defensible risk conditions.
 
