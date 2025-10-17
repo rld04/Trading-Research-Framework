@@ -25,11 +25,11 @@ Each strategy supports configurable parameters and realistic execution timing (n
 
 ### 🔹 Built-In Risk Parameters
 One of the Main goals of MTC Trading v1.0 was to design a realistic framwork were it simulates how a disciplined, risk-aware trader would actually manage capital in real markets. MTC Trading v1.0 comes with realistic, industry-aligned risk parameters built in by default. These act as the foundation for position sizing, trade exits, and portfolio exposure, helping keep results meaningful and practical.
-- **`max_position_size`** - Limits any single trade to 20% of total portfolio value, ensuring no single idea dominates risk.
-- **`stop_loss_pct `** - Automatically exits a position if it falls 5% below the entry price (a built-in capital preservation rule).
-- **`take_profit_pct `** - Locks in gains once a trade reaches a 15% profit target, maintaining a balanced 3:1 reward-to-risk ratio.
-- **`max_portfolio_risk `** - Caps total risk exposure per trade to 2% of the portfolio, enforcing institutional-style discipline.
-- **`trailing_stop_pct `** - Adjusts dynamically as price moves in your favor, protecting profits while allowing trades to breathe.
+- **`max_position_size` (20%)** - Limits any single trade to ensure no single idea dominates risk.
+- **`stop_loss_pct ` (5%)** - Automatically exits a position (built-in capital preservation rule).
+- **`take_profit_pct ` (15%)** - Locks in gains, maintaining a balanced 3:1 reward-to-risk ratio.
+- **`max_portfolio_risk ` (2%)** - Caps total risk exposure per trade, enforcing institutional-style discipline.
+- **`trailing_stop_pct ` (10%)** - Adjusts dynamically as price moves in your favor, protecting profits.
 
 ---
 
