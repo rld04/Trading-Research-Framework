@@ -1,22 +1,14 @@
 # 📊 MTC Trading v1.0 — Trading Research Framwork
- 
-**MTC Trading v1.0** is a full-featured backtesting engine built to model, test, and analyze systematic trading strategies under realistic market conditions. Using real, up-to-date market data on any listed equity, allowing users to evaluate performance across custom historical periods or the most recent market environment. 
 
-Supporting Stocks, Etfs, Indices, Commodities, Currencies throught live market data from *Yahoo Finance*,  with future integration plans of Crypto.
-Users can define **custom start and end dates**, or backtest strategies using data **up to the current date**, making it ideal for real-time research and learning.
-
----
 
 ## 🧠 Overview
 
-The framework allows for:
-- Single-asset and multi-asset backtesting
-- Multiple trading strategies (momentum, mean reversion, RSI, MA crossovers)
-- Advanced risk management (position sizing, stop-loss, take-profit, trailing stop)
-- Dynamic portfolio optimization and asset allocation
-- Performance analytics and visualization
+**MTC Trading v1.0** is a full-featured backtesting engine built to model, test, and analyze systematic trading strategies under realistic market conditions. Using real, up-to-date market data on any listed equity, allowing users to evaluate performance across custom historical periods or the most recent market environment. 
 
-The goal of this project was to design a **transparent, configurable, and research-oriented environment** for testing systematic strategies with academic rigor and real-world practicality.
+Supporting Stocks, Etfs, Indices, Commodities, Currencies throught live market data from *Yahoo Finance*,  with future integration plans of Crypto.
+Users can freely select **custom start and end dates**, or backtest strategies using data **up to the current date**.
+
+The goal of this project was to challenge myself to design and build a **transparent, configurable sandbox** for testing systematic strategies and real-world practicality.
 
 ---
 
