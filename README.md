@@ -16,10 +16,10 @@ The goal of this project was to challenge myself to design and build a **transpa
 
 ### 🔹 Strategies Implemented
 Includes several classical and research-backed trading models:
-- **Moving Average Crossover** – trend-following logic with configurable short/long windows.  
-- **Momentum Strategy** – trades based on directional price persistence.  
-- **Mean Reversion (Bollinger Bands)** – volatility-based contrarian model.
-- **RSI Strategy** – oscillator-driven entry and exit signals.
+- **Moving Average Crossover** – Trend-following logic with configurable short/long windows.  
+- **Momentum Strategy** – Trades based on directional price persistence.  
+- **Mean Reversion (Bollinger Bands)** – Volatility-based contrarian model.
+- **RSI Strategy** – Oscillator-driven entry and exit signals.
 
 Each strategy supports configurable parameters and realistic execution timing (next-bar vs same-bar).
 
@@ -37,10 +37,10 @@ One of the Main goals of MTC Trading v1.0 was to design a realistic framwork wer
 The framework includes a dedicated **`RiskManager`** module designed to replicate institutional-style capital management. It controls trade sizing, exit logic, and portfolio exposure, ensuring that every strategy operates under realistic, disciplined risk conditions.
 
 Core Functions:
-- **Kelly-inspired sizing** - trade sizes adjust dynamically based on portfolio risk and market volatility. This draws on the Kelly Criterion principle: allocating more when conditions are favorable and less when risk increases, balancing long-term growth and drawdown control.
-- **Stop Loss**, **Take Profit**, and **Trailing Stop** - execution logic  
-- **Maximum Portfolio Exposure** and **Per-Trade Risk** - caping total open risk to prevent over-leverage and preserve capital during volatile markets. 
-- **Detailed event logging** - tracks all risk triggers and exits, providing full transparency for analysis and debugging.
+- **Kelly-inspired sizing** - Trade sizes adjust dynamically based on portfolio risk and market volatility. This draws on the Kelly Criterion principle: allocating more when conditions are favorable and less when risk increases, balancing long-term growth and drawdown control.
+- **Stop Loss**, **Take Profit**, and **Trailing Stop** - Execution logic  
+- **Maximum Portfolio Exposure** and **Per-Trade Risk** - Caping total open risk to prevent over-leverage and preserve capital during volatile markets. 
+- **Detailed event logging** - Tracks all risk triggers and exits, providing full transparency for analysis and debugging.
 
 This ensures all strategies operate under controlled, defensible risk conditions.
 
