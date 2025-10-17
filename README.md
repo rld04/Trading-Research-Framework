@@ -14,14 +14,23 @@ The goal of this project was to challenge myself to design and build a **transpa
 
 ## ⚙️ Key Features
 
-### 🔹 Strategy Engine
-Implements multiple quantitative trading strategies:
-- **Moving Average Crossover** – classical trend-following setup using short and long MAs.
-- **Momentum Strategy** – directional trading based on recent return persistence.
-- **Mean Reversion (Bollinger Bands)** – volatility-based contrarian system.
-- **RSI Strategy** – oscillator-driven approach capturing overbought/oversold conditions.
+### 🔹 Strategies Implemented
+Includes several classical and research-backed trading models:
+- **Moving Average Crossover** – trend-following logic with configurable short/long windows.  
+- **Momentum Strategy** – trades based on directional price persistence.  
+- **Mean Reversion (Bollinger Bands)** – volatility-based contrarian model.
+- **RSI Strategy** – oscillator-driven entry and exit signals.
 
 Each strategy supports configurable parameters and realistic execution timing (next-bar vs same-bar).
+
+### 🔹 Built-In Risk Parameters
+One of the Main goals of MTC Trading v1.0 was to design a realistic framwork were it simulates how a disciplined, risk-aware trader would actually manage capital in real markets. MTC Trading v1.0 comes with realistic, industry-aligned risk parameters built in by default. These act as the foundation for position sizing, trade exits, and portfolio exposure, helping keep results meaningful and practical.
+- **Max Position Size (20%)** - Limits any single trade to 20% of total portfolio value, ensuring no single idea dominates risk.
+- **Stop Loss Percentage (5%)** - Automatically exits a position if it falls 5% below the entry price (a built-in capital preservation rule).
+- **Take Profit Percentage (15%)** - Locks in gains once a trade reaches a 15% profit target, maintaining a balanced 3:1 reward-to-risk ratio.
+- **Max Porfolio Risk (2%)** - Caps total risk exposure per trade to 2% of the portfolio, enforcing institutional-style discipline.
+- **Trailing Stop Percentage (10%)** - Adjusts dynamically as price moves in your favor, protecting profits while allowing trades to breathe.
+  
 
 ---
 
