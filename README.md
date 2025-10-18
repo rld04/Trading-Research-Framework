@@ -1,5 +1,6 @@
 # 📊 MTC Trading v1.0 — Trading Research Framwork
 
+MTC Trading v1.0 is a production-grade backtesting engine that lets you test systematic trading strategies against real market data with institutional-level risk management built in.
 
 ## 🧠 Overview
 
