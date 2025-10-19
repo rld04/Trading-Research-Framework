@@ -87,7 +87,7 @@ Core Metrics:
   - **Equity Curve** compared to Buy & Hold benchmark. 
   - **Signal Overlay Charts** displaying strategy entries and exits on price data.
   - **Drawdown Visualization** highlighting risk and recovery phases.
-  - **Rolling Sharpe Ratio** to show consistency and performance stability over time. 
+  - **Rolling Sharpe Ratio** to show consistency and performance stability over time.
 
 Together, these analytics make MTC Trading v1.0 a complete research environment. Turning raw backtest results into actionable insights and performance diagnostics that mirror professional portfolio reporting standards.
 
@@ -125,3 +125,16 @@ The **`RiskManager`** continuously monitors all open positions and applies built
 - **Risk Event Logging**: Records all triggers with timestamps and reason codes for later analysis.
 
 This ensures that every strategy remains within the framework’s institutional-grade risk boundaries, maintaining both realism and capital discipline.
+
+## 4️⃣ Performance Calculation
+After each bar (daily interval by default):
+- **Portfolio value** is computed as cash + holdings after every iteration.
+- **Daily return** = (current portfolio / previous portfolio) − 1.
+- **Risk-adjusted** metrics such as Sharpe, Sortino, Calmar ratios, and maximum drawdown are calculated using the time series of returns.
+   - $$[r_1, r_2, r_3, \dots, r_T]$$
+- Key statistics:
+  - volatility
+  - Sharpe ratio
+  - Drawdown, and other metrics — are updated iteratively.
+ 
+  This continuous evaluation loop provides a transparent, data-driven foundation for all performance analytics and visual reports.
