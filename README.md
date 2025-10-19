@@ -75,16 +75,21 @@ By combining flexibility with data integrity, MTC Trading v1.0 delivers backtest
 ---
 
 ### 🔹 Performance Analytics
-Comprehensive post-simulation metrics include:
-- Total, annualized, and benchmark returns  
-- **Sharpe, Sortino, and Calmar ratios**  
-- **Maximum drawdown** and volatility statistics  
-- **Win rate**, streaks, and trade-level summaries  
-- Optional graphical analysis:
-  - Equity curve vs Buy & Hold  
-  - Signal overlay on price chart  
-  - Drawdown visualization  
-  - Rolling Sharpe ratio dynamics  
+The framework provides a comprehensive analytics suite that evaluates both strategy performance and risk-adjusted efficiency.
+After each backtest, the system generates detailed metrics and visual reports that allow users to interpret results the same way quantitative researchers analyze real portfolios.
+
+Core Metrics:
+- **Return Analysis**: Calculates total, annualized, and benchmark-adjusted returns to measure absolute and relative performance. 
+- **Risk Ratios**: Includes Sharpe, Sortino, and Calmar ratios, providing a full view of reward-to-risk efficiency.
+- **Volatility & Drawdown**: Reports maximum drawdown, volatility, and recovery periods to assess downside risk.
+- **Trade Statistics**: Summarizes win rate, average gain/loss, holding periods, and trade streaks for behavioral insights.  
+- **Optional Visual Reports**:
+  - **Equity Curve** compared to Buy & Hold benchmark. 
+  - **Signal Overlay Charts** displaying strategy entries and exits on price data.
+  - **Drawdown Visualization** highlighting risk and recovery phases.
+  - **Rolling Sharpe Ratio** to show consistency and performance stability over time. 
+
+Together, these analytics make MTC Trading v1.0 a complete research environment. Turning raw backtest results into actionable insights and performance diagnostics that mirror professional portfolio reporting standards.
 
 ---
 
