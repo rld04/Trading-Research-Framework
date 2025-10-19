@@ -4,6 +4,8 @@
 ![License](https://img.shields.io/badge/license-MIT-green.svg)
 [![Documentation](https://img.shields.io/badge/docs-mathematical-orange.svg)](MATHEMATICAL_FOUNDATIONS.md)
 
+**[📐 Mathematical Foundations](MATHEMATICAL_FOUNDATIONS.md)** | **[📖 Full Documentation](README.md)**
+
 ---
 
 MTC Trading v1.0 is a production-grade backtesting engine...
