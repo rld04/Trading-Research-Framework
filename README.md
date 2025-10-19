@@ -1,6 +1,8 @@
 # 📊 MTC Trading v1.0 — Trading Research Framwork
 
-**[📐 Mathematical Foundations](MATHEMATICAL_FOUNDATIONS.md)** | **[📖 Full Documentation](README.md)**
+![Python](https://img.shields.io/badge/python-3.8+-blue.svg)
+![License](https://img.shields.io/badge/license-MIT-green.svg)
+[![Documentation](https://img.shields.io/badge/docs-mathematical-orange.svg)](MATHEMATICAL_FOUNDATIONS.md)
 
 ---
 
