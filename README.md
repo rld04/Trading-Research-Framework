@@ -48,12 +48,14 @@ This ensures all strategies operate under controlled, defensible risk conditions
 ---
 
 ### 🔹 Portfolio Management & Optimization
-The **`PortfolioManager`** provides advanced multi-asset functionality:
-- Equal-weight, Risk-Parity, Momentum-Weighted, and Market-Cap allocations  
-- Mean-Variance Optimization (Markowitz framework)  
-- Correlation matrix and inter-asset risk diagnostics  
+The **`PortfolioManager`** The PortfolioManager module expands the framework beyond single-asset strategies, enabling multi-asset portfolio simulation and optimization. It integrates several allocation methodologies and diagnostic tools that mirror techniques used in institutional portfolio research.
 
-Enables both diversified portfolio construction and performance attribution studies.
+Core Capabilities:
+- **Allocation Models**: Supports multiple weighting schemes, including Equal-Weight, Risk-Parity, Momentum-Weighted, and Market-Cap Weighted portfolios.
+- **Optimization Framework**: Implements Mean–Variance Optimization (Markowitz model) to explore the trade-off between expected return and portfolio volatility.
+- **Correlation & Risk Analysis**: Computes inter-asset correlations and risk contribution diagnostics, helping evaluate diversification effectiveness and asset dependencies. 
+
+By combining these features, MTC Trading v1.0 allows users to construct, test, and analyze portfolios the same way quantitative research teams evaluate strategy combinations enabling the user to balance risk, return, and diversification in a controlled, data-driven manner.
 
 ---
 
