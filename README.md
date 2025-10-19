@@ -118,3 +118,10 @@ When a signal is generated:
 By enforcing position limits and capital checks at every step, the framework prevents unrealistic leverage and maintains accurate trade records.
 
 ## 3️⃣ Risk Control Workflow
+The **`RiskManager`** continuously monitors all open positions and applies built-in protection mechanisms:
+- **Stop-Loss Check**: Exits trades exceeding defined downside thresholds.
+- **Take-Profit Check**: Locks in gains once the target percentage is reached.
+- **Trailing Stop Update**: Adjusts dynamically with favorable price movements.
+- **Risk Event Logging**: Records all triggers with timestamps and reason codes for later analysis.
+
+This ensures that every strategy remains within the framework’s institutional-grade risk boundaries, maintaining both realism and capital discipline.
