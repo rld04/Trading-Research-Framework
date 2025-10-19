@@ -60,12 +60,17 @@ By combining these features, MTC Trading v1.0 allows users to construct, test, a
 ---
 
 ### 🔹 Backtesting Engine
-The **`TradingBot`** executes historical simulations with:
-- Configurable **commission and slippage models**  
-- **Realistic execution modes** to prevent look-ahead bias  
-- Complete portfolio accounting (cash, holdings, total value)  
-- **Buy & Hold benchmarks** for direct performance comparison  
-- Full trade logging with entry/exit dates, reason codes, and duration tracking  
+The **`TradingBot`** module serves as the core of the framework, executing historical simulations that replicate real-world trading conditions as closely as possible.
+It handles trade execution, accounting, and performance tracking across any chosen date range using live market data.
+
+Core Capabilities:
+- **Configurable Transaction Costs**: Supports realistic commission and slippage models to simulate trading friction.
+- **Execution Modes**: Offers Realistic and Optimistic settings to control for look-ahead bias, ensuring fair backtest results.  
+- **Portfolio Accounting**: Tracks cash balances, holdings, and total portfolio value throughout the simulation.
+- **Benchmark Comparison**: Automatically computes a Buy & Hold reference for direct performance evaluation.  
+- **Comprehensive Trade Logging**: Records every trade with entry and exit dates, reason codes, and holding duration for full transparency.
+
+By combining flexibility with data integrity, MTC Trading v1.0 delivers backtests that are both statistically robust and operationally realistic, bridging the gap between academic research and real-world trading execution.
 
 ---
 
