@@ -93,18 +93,28 @@ Together, these analytics make MTC Trading v1.0 a complete research environment.
 
 ---
 
-## 🧩 Technical Logic (Detailed)
+## 🧩 Technical Logic
+
+The internal logic of MTC Trading v1.0 follows a clear, modular structure that mirrors how professional backtesting systems operate.
+Each component of the framework, from signal generation to risk enforcement, interact systematically to ensure realistic simulations and accurate analytics.
 
 ### 1️⃣ Execution Architecture
-- **BacktestConfig** governs execution behavior (commission, slippage, and look-ahead mode).  
-- Each strategy produces a **signal DataFrame**.  
-- Depending on mode:
-  - *Realistic*: signals execute on the next bar (avoiding look-ahead bias).  
-  - *Optimistic*: executes on the same bar for theoretical comparison.
+The **BacktestConfig** class governs how the system executes trades and manages transaction costs:
+- Controls **commission**, **slippage**, and **execution mode** parameters.
+- Each strategy outputs a **signal DataFrame** containing buy/sell indicators.
+- Execution mode determines when trades occur:
+  - *Realistic*: Executes signals on the next bar to prevent look-ahead bias (used for accurate simulations).
+  - *Optimistic*: Executes on the same bar for theoretical or comparative testing.
+
+This modular structure ensures consistency between strategy logic and portfolio accounting, keeping results statistically valid.
 
 ### 2️⃣ Position Management
-- Position size is determined using portfolio value, volatility, and max-risk constraints.  
-- When an entry signal occurs:
-  - Shares are sized using the `calculate_position_size()` method.  
-  - The bot verifies capital sufficiency and deducts commission/slippage.  
-- When exit criteria (signal reversal or stop event) occur, al
+Position sizing and trade execution are driven by portfolio capital, volatility, and defined risk thresholds.
+When a signal is generated:
+  - The system calculates optimal share size using the `calculate_position_size()` method.  
+  - The bot checks capital sufficiency, applying commission and slippage adjustments.
+  - Positions are opened or closed based on entry and exit signals, stop-loss triggers, or trailing-stop updates.
+
+By enforcing position limits and capital checks at every step, the framework prevents unrealistic leverage and maintains accurate trade records.
+
+## 3️⃣ Risk Control Workflow
