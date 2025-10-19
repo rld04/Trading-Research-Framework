@@ -131,10 +131,14 @@ After each bar (daily interval by default):
 - **Portfolio value** is computed as cash + holdings after every iteration.
 - **Daily return** = (current portfolio / previous portfolio) − 1.
 - **Risk-adjusted** metrics such as Sharpe, Sortino, Calmar ratios, and maximum drawdown are calculated using the time series of returns.
+   - $$r_t = \frac{V_t - V_{t-1}}{V_{t-1}}$$
+   - V*t* = Portfolio value at time *t*.
+   - *r**t*= return on that day.
    - $$[r_1, r_2, r_3, \dots, r_T]$$
+- Benchmark comparisons and trade-level summaries are generated to evaluate strategy effectiveness relative to Buy & Hold performance.
 - Key statistics:
   - volatility
   - Sharpe ratio
   - Drawdown, and other metrics — are updated iteratively.
  
-  This continuous evaluation loop provides a transparent, data-driven foundation for all performance analytics and visual reports.
+These calculations feed directly into the framework’s Performance Analytics module, which compiles all metrics and visual reports at the end of the backtest for interpretation and review.
