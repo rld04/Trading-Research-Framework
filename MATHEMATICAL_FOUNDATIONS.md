@@ -23,14 +23,6 @@ The framework integrates concepts from quantitative finance, portfolio theory, a
 ## I. Core Concepts
 
 ### 🔹 Returns Calculation
-For each time period \( t \):
-\[
-r_t = \frac{V_t - V_{t-1}}{V_{t-1}}
-\]
-where \( V_t \) is the portfolio value at time \( t \).  
-The list \([r_1, r_2, \dots, r_T]\) forms the **time series of returns**, used throughout performance analytics.
-
-### 🔹 Cumulative and Annualized Returns
 **Daily Return:**
 
 For each time period $t$, the daily return is calculated as:
@@ -48,6 +40,28 @@ The sequence $[r_1, r_2, \dots, r_T]$ forms the **time series of returns**, whic
 # See TradingBot.backtest() method
 portfolio.loc[date, 'returns'] = (portfolio.loc[date, 'total'] / prev_total) - 1
 ```
+
+### 🔹 Cumulative and Annualized Returns
+**Total Return:**
+
+$$R_{\text{total}} = \frac{V_{\text{final}} - V_{\text{initial}}}{V_{\text{initial}}} = \frac{V_{\text{final}}}{V_{\text{initial}}} - 1$$
+
+**Cumulative Compounded Return:**
+
+$$R_{\text{cumulative}} = \prod_{t=1}^{T}(1 + r_t) - 1$$
+
+**Annualized Return:**
+
+$$R_{\text{annualized}} = \left(1 + R_{\text{total}}\right)^{\frac{252}{N}} - 1$$
+
+Where:
+- $N$ = Number of trading days in the backtest
+- 252 = Average number of trading days per year in U.S. markets
+
+**Why 252 days?** U.S. stock markets are typically open ~252 days per year (365 days - weekends - holidays).
+
+---
+
 
 ### 🔹 Portfolio Accounting
 \[
