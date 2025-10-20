@@ -7,6 +7,19 @@ The framework integrates concepts from quantitative finance, portfolio theory, a
 
 ---
 
+## 📚 Table of Contents
+
+1. [Core Concepts](#i-core-concepts)
+2. [Risk Metrics](#ii-risk-metrics)
+3. [Position Sizing & Risk Management](#iii-position-sizing--risk-management)
+4. [Technical Indicators & Strategy Logic](#iv-technical-indicators--strategy-logic)
+5. [Portfolio Theory](#v-portfolio-theory)
+6. [Execution Model](#vi-execution-model)
+7. [Assumptions & Limitations](#vii-assumptions--limitations)
+8. [References](#viii-references)
+
+---
+ 
 ## I. Core Concepts
 
 ### 🔹 Returns Calculation
@@ -18,13 +31,23 @@ where \( V_t \) is the portfolio value at time \( t \).
 The list \([r_1, r_2, \dots, r_T]\) forms the **time series of returns**, used throughout performance analytics.
 
 ### 🔹 Cumulative and Annualized Returns
-\[
-R_{\text{total}} = \frac{V_{\text{final}} - V_{\text{initial}}}{V_{\text{initial}}}
-\]
-\[
-R_{\text{annualized}} = (1 + R_{\text{total}})^{\frac{252}{N}} - 1
-\]
-where \( N \) is the number of trading days in the backtest.
+**Daily Return:**
+
+For each time period $t$, the daily return is calculated as:
+
+$$r_t = \frac{V_t - V_{t-1}}{V_{t-1}}$$
+
+Where:
+- $V_t$ = Portfolio value at time $t$
+- $r_t$ = Return on day $t$
+
+The sequence $[r_1, r_2, \dots, r_T]$ forms the **time series of returns**, which is the foundation for all performance analytics.
+
+**Implementation:**
+```python
+# See TradingBot.backtest() method
+portfolio.loc[date, 'returns'] = (portfolio.loc[date, 'total'] / prev_total) - 1
+```
 
 ### 🔹 Portfolio Accounting
 \[
