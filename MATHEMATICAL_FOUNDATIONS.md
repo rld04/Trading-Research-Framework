@@ -60,8 +60,6 @@ Where:
 
 **Why 252 days?** U.S. stock markets are typically open ~252 days per year (365 days - weekends - holidays).
 
----
-
 
 ### 🔹 Portfolio Accounting
 At any time $t$, the portfolio value is:
@@ -104,7 +102,7 @@ $$\sigma_{\text{annual}} = \sigma_{\text{daily}} \times \sqrt{252}$$
 # See TradingBot.calculate_metrics()
 volatility = returns.std() * np.sqrt(252) * 100
 ```
----
+
 ### 🔹 Sharpe Ratio
 **Definition:** Risk-adjusted return metric that measures excess return per unit of risk.
 
@@ -127,23 +125,63 @@ Where:
 # See TradingBot.calculate_metrics()
 sharpe_ratio = np.sqrt(252) * returns.mean() / returns.std()
 ```
----
+
 
 ### 🔹 Sortino Ratio
-\[
-\text{Sortino} = \frac{\bar{r} - r_f}{\sigma_{\text{downside}}}
-\]
-where \(\sigma_{\text{downside}}\) is the standard deviation of returns below zero.
+**Definition:** Similar to Sharpe, but only penalizes downside volatility.
+
+$$\text{Sortino Ratio} = \frac{\bar{r} - r_f}{\sigma_{\text{downside}}} \times \sqrt{252}$$
+
+Where:
+
+$$\sigma_{\text{downside}} = \sqrt{\frac{1}{N_{\text{down}}}\sum_{r_t < 0}(r_t)^2}$$
+
+**Why use Sortino?** Upside volatility is desirable, so Sortino only penalizes negative returns. This gives a more accurate picture of risk for asymmetric return distributions.
+
+**Implementation:**
+```python
+# See TradingBot.calculate_metrics()
+downside_returns = returns[returns < 0]
+downside_std = downside_returns.std()
+sortino_ratio = np.sqrt(252) * returns.mean() / downside_std
+```
 
 ### 🔹 Calmar Ratio
-\[
-\text{Calmar} = \frac{R_{\text{annualized}}}{|\text{Max Drawdown}|}
-\]
+**Definition:** Ratio of annualized return to maximum drawdown.
 
-### 🔹 Maximum Drawdown
-\[
-\text{MDD} = \max\left(\frac{P_{\text{peak}} - P_{\text{trough}}}{P_{\text{peak}}}\right)
-\]
+$$\text{Calmar Ratio} = \frac{R_{\text{annualized}}}{|\text{Max Drawdown}|}$$
+
+**Interpretation:**
+- **> 3.0** = Excellent
+- **1.0 - 3.0** = Good
+- **< 1.0** = Poor (returns don't justify the risk)
+
+Higher Calmar ratios indicate better risk-adjusted returns relative to worst-case losses.
+
+### 🔹 Maximum Drawdown (MDD)
+**Definition:** Largest peak-to-trough decline in portfolio value.
+
+$$\text{MDD} = \max_{t \in [0,T]} \left(\frac{P_{\text{peak}}(t) - P_{\text{trough}}(t)}{P_{\text{peak}}(t)}\right)$$
+
+**Calculation Process:**
+1. Track running maximum (peak): $P_{\text{peak}}(t) = \max_{s \leq t} V_s$
+2. Calculate drawdown at each point: $DD_t = \frac{V_t - P_{\text{peak}}(t)}{P_{\text{peak}}(t)}$
+3. Maximum drawdown: $\text{MDD} = \min_t DD_t$
+
+**Implementation:**
+```python
+# See TradingBot.calculate_metrics()
+cumulative = (1 + returns).cumprod()
+running_max = cumulative.expanding().max()
+drawdown = (cumulative - running_max) / running_max
+max_drawdown = drawdown.min() * 100
+```
+
+**Interpretation:**
+- **< 10%** = Excellent capital preservation
+- **10-20%** = Acceptable for most strategies
+- **20-30%** = High risk
+- **> 30%** = Very high risk; may indicate poor risk management
 
 ---
 
