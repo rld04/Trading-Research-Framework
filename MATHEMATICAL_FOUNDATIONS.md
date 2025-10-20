@@ -83,15 +83,51 @@ portfolio.loc[date, 'total'] = cash + (position * price)
 
 ## II. Risk Metrics
 
-### 🔹 Volatility
-\[
-\sigma = \sqrt{\frac{1}{N - 1}\sum_{t=1}^{N}(r_t - \bar{r})^2}
-\]
+### 🔹 Volatility (Standard Deviation)
 
+**Sample Standard Deviation:**
+
+$$\sigma = \sqrt{\frac{1}{N - 1}\sum_{t=1}^{N}(r_t - \bar{r})^2}$$
+
+Where:
+- $\bar{r}$ = Mean return = $\frac{1}{N}\sum_{t=1}^{N}r_t$
+- $N$ = Number of observations
+
+**Annualized Volatility:**
+
+$$\sigma_{\text{annual}} = \sigma_{\text{daily}} \times \sqrt{252}$$
+
+**Why $\sqrt{252}$?** Variance scales linearly with time, so standard deviation scales with the square root of time.
+
+**Implementation:**
+```python
+# See TradingBot.calculate_metrics()
+volatility = returns.std() * np.sqrt(252) * 100
+```
+---
 ### 🔹 Sharpe Ratio
-\[
-\text{Sharpe} = \frac{\bar{r} - r_f}{\sigma}
-\]
+**Definition:** Risk-adjusted return metric that measures excess return per unit of risk.
+
+$$\text{Sharpe Ratio} = \frac{\bar{r} - r_f}{\sigma} \times \sqrt{252}$$
+
+Where:
+- $\bar{r}$ = Average daily return
+- $r_f$ = Risk-free rate (typically assumed to be 0 for simplicity)
+- $\sigma$ = Standard deviation of daily returns
+- $\sqrt{252}$ = Annualization factor
+
+**Interpretation:**
+- **< 1.0** = Poor risk-adjusted performance
+- **1.0 - 2.0** = Good performance
+- **> 2.0** = Excellent performance
+- **> 3.0** = Exceptional (rare without overfitting)
+
+**Implementation:**
+```python
+# See TradingBot.calculate_metrics()
+sharpe_ratio = np.sqrt(252) * returns.mean() / returns.std()
+```
+---
 
 ### 🔹 Sortino Ratio
 \[
