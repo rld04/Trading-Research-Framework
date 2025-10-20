@@ -1,9 +1,8 @@
-# 📊 MTC Trading v1.0 — Mathematical Foundations
+# 📐 Mathematical Foundations of MTC Trading v1.0
 
-# 📐 Mathematical Foundations
+> **Comprehensive documentation of the quantitative methods, formulas, and statistical foundations underlying the MTC Trading backtesting framework.**
 
-This section summarizes the key mathematical principles and formulas that power **MTC Trading v1.0**.  
-The framework integrates concepts from quantitative finance, portfolio theory, and risk management to simulate realistic trading behavior and performance analytics.
+This document explains the mathematical principles that power MTC Trading v1.0, integrating concepts from quantitative finance, portfolio theory, and risk management to simulate realistic trading behavior and performance analytics.
 
 ---
 
@@ -19,10 +18,11 @@ The framework integrates concepts from quantitative finance, portfolio theory, a
 8. [References](#viii-references)
 
 ---
- 
+
 ## I. Core Concepts
 
 ### 🔹 Returns Calculation
+
 **Daily Return:**
 
 For each time period $t$, the daily return is calculated as:
@@ -41,7 +41,10 @@ The sequence $[r_1, r_2, \dots, r_T]$ forms the **time series of returns**, whic
 portfolio.loc[date, 'returns'] = (portfolio.loc[date, 'total'] / prev_total) - 1
 ```
 
-### 🔹 Cumulative and Annualized Returns
+---
+
+### 🔹 Cumulative Returns
+
 **Total Return:**
 
 $$R_{\text{total}} = \frac{V_{\text{final}} - V_{\text{initial}}}{V_{\text{initial}}} = \frac{V_{\text{final}}}{V_{\text{initial}}} - 1$$
@@ -60,8 +63,10 @@ Where:
 
 **Why 252 days?** U.S. stock markets are typically open ~252 days per year (365 days - weekends - holidays).
 
+---
 
 ### 🔹 Portfolio Accounting
+
 At any time $t$, the portfolio value is:
 
 $$V_t = C_t + \sum_{i=1}^{n} P_{i,t} \times Q_{i,t}$$
@@ -77,6 +82,7 @@ Where:
 # See TradingBot.backtest() method
 portfolio.loc[date, 'total'] = cash + (position * price)
 ```
+
 ---
 
 ## II. Risk Metrics
@@ -103,7 +109,10 @@ $$\sigma_{\text{annual}} = \sigma_{\text{daily}} \times \sqrt{252}$$
 volatility = returns.std() * np.sqrt(252) * 100
 ```
 
+---
+
 ### 🔹 Sharpe Ratio
+
 **Definition:** Risk-adjusted return metric that measures excess return per unit of risk.
 
 $$\text{Sharpe Ratio} = \frac{\bar{r} - r_f}{\sigma} \times \sqrt{252}$$
@@ -126,8 +135,10 @@ Where:
 sharpe_ratio = np.sqrt(252) * returns.mean() / returns.std()
 ```
 
+---
 
 ### 🔹 Sortino Ratio
+
 **Definition:** Similar to Sharpe, but only penalizes downside volatility.
 
 $$\text{Sortino Ratio} = \frac{\bar{r} - r_f}{\sigma_{\text{downside}}} \times \sqrt{252}$$
@@ -146,7 +157,10 @@ downside_std = downside_returns.std()
 sortino_ratio = np.sqrt(252) * returns.mean() / downside_std
 ```
 
+---
+
 ### 🔹 Calmar Ratio
+
 **Definition:** Ratio of annualized return to maximum drawdown.
 
 $$\text{Calmar Ratio} = \frac{R_{\text{annualized}}}{|\text{Max Drawdown}|}$$
@@ -158,7 +172,10 @@ $$\text{Calmar Ratio} = \frac{R_{\text{annualized}}}{|\text{Max Drawdown}|}$$
 
 Higher Calmar ratios indicate better risk-adjusted returns relative to worst-case losses.
 
+---
+
 ### 🔹 Maximum Drawdown (MDD)
+
 **Definition:** Largest peak-to-trough decline in portfolio value.
 
 $$\text{MDD} = \max_{t \in [0,T]} \left(\frac{P_{\text{peak}}(t) - P_{\text{trough}}(t)}{P_{\text{peak}}(t)}\right)$$
