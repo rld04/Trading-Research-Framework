@@ -64,13 +64,21 @@ Where:
 
 
 ### 🔹 Portfolio Accounting
-\[
-V_t = C_t + \sum_{i=1}^{n} P_{i,t} \times Q_{i,t}
-\]
-- \( C_t \): cash balance  
-- \( P_{i,t} \): asset price  
-- \( Q_{i,t} \): position quantity  
+At any time $t$, the portfolio value is:
 
+$$V_t = C_t + \sum_{i=1}^{n} P_{i,t} \times Q_{i,t}$$
+
+Where:
+- $C_t$ = Cash balance at time $t$
+- $P_{i,t}$ = Price of asset $i$ at time $t$
+- $Q_{i,t}$ = Quantity (shares) of asset $i$ held at time $t$
+- $n$ = Number of assets in portfolio
+
+**Implementation:**
+```python
+# See TradingBot.backtest() method
+portfolio.loc[date, 'total'] = cash + (position * price)
+```
 ---
 
 ## II. Risk Metrics
