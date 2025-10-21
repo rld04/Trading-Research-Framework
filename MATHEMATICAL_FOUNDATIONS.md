@@ -298,6 +298,18 @@ triggered = loss_pct <= -self.stop_loss_pct
 ```
 
 ---
+### 🔹 Take Profit Logic
+
+**Trigger Condition:**
+
+$$\text{Take Profit Triggered} = \begin{cases} 
+\text{True}, & \text{if } \frac{P_{\text{current}} - P_{\text{entry}}}{P_{\text{entry}}} \geq \text{Take Profit %} \\
+\text{False}, & \text{otherwise}
+\end{cases}$$
+
+Default: 15% take profit (3:1 reward-to-risk ratio)
+
+---
 ## IV. Strategy Logic
 
 ### 🔹 Moving Average Crossover
@@ -331,6 +343,29 @@ Typical thresholds: **Buy below 30**, **Sell above 70**.
 -1, & P_t < P_{t-k}
 \end{cases}
 \]
+
+---
+### 🔹 Trailing Stop Logic
+
+**Peak Tracking:**
+
+$$P_{\text{peak}}(t) = \max(P_{\text{peak}}(t-1), P_{\text{current}}(t))$$
+
+**Trailing Stop Price:**
+
+$$P_{\text{stop}}(t) = P_{\text{peak}}(t) \times (1 - \text{Trailing Stop %})$$
+
+**Trigger Condition:**
+
+$$\text{Trailing Stop Triggered} = P_{\text{current}} \leq P_{\text{stop}}$$
+
+Default: 10% trailing stop
+
+**Example:**
+- Entry: $100
+- Peak: $120 (position up 20%)
+- Trailing stop at 10%: $120 × 0.90 = **$108**
+- Triggered if price falls to $108, locking in ~8% gain
 
 ---
 
