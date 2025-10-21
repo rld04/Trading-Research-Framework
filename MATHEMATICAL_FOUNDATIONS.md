@@ -256,7 +256,29 @@ The framework uses a **modified Kelly approach** by:
 **Why not pure Kelly?** Pure Kelly can be too aggressive and lead to excessive drawdowns. Professional traders typically use **fractional Kelly** (e.g., 25-50% of Kelly optimal) for more conservative sizing.
 
 ---
+### 🔹 Position Size Constraints
 
+The system applies **dual constraints** to ensure safe position sizing:
+
+**Constraint 1: Maximum Position Size**
+
+$$Q_{\text{max,dollars}} = \left\lfloor \frac{V_{\text{portfolio}} \times \text{Max Position %}}{P_{\text{entry}}} \right\rfloor$$
+
+Default: 20% of portfolio per position
+
+**Constraint 2: Risk-Based Sizing**
+
+$$Q_{\text{max,risk}} = \left\lfloor \frac{V_{\text{portfolio}} \times \text{Max Risk %}}{P_{\text{entry}} \times \text{Stop Loss %}} \right\rfloor$$
+
+Default: 2% portfolio risk per trade
+
+**Final Position Size:**
+
+$$Q_{\text{final}} = \min(Q_{\text{max,dollars}}, Q_{\text{max,risk}})$$
+
+This ensures positions are limited by BOTH absolute size AND potential loss.
+
+---
 ## IV. Strategy Logic
 
 ### 🔹 Moving Average Crossover
