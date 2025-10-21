@@ -335,14 +335,35 @@ Default: 10% trailing stop
 ---
 ## IV. Strategy Logic
 
-### 🔹 Moving Average Crossover
-\[
-\text{Signal} =
-\begin{cases}
-1, & \text{if } \text{MA}_{\text{short}} > \text{MA}_{\text{long}} \\
--1, & \text{if } \text{MA}_{\text{short}} < \text{MA}_{\text{long}}
-\end{cases}
-\]
+### 🔹 Moving Average (MA)
+
+**Simple Moving Average (SMA):**
+
+$$\text{MA}_n(t) = \frac{1}{n}\sum_{i=0}^{n-1} P_{t-i}$$
+
+Where:
+- $n$ = Window size (e.g., 50 days, 200 days)
+- $P_t$ = Price at time $t$
+
+**Crossover Signal:**
+
+$$\text{Signal}(t) = \begin{cases}
++1 \text{ (Buy)}, & \text{if } \text{MA}_{\text{short}}(t) > \text{MA}_{\text{long}}(t) \\
+-1 \text{ (Sell)}, & \text{if } \text{MA}_{\text{short}}(t) < \text{MA}_{\text{long}}(t) \\
+0 \text{ (Hold)}, & \text{otherwise}
+\end{cases}$$
+
+**Common Configurations:**
+- **Golden Cross**: MA(50) crosses above MA(200) → Bullish signal
+- **Death Cross**: MA(50) crosses below MA(200) → Bearish signal
+
+**Implementation:**
+```python
+# See TradingBot.moving_average_crossover()
+signals['short_ma'] = data['Close'].rolling(window=short_window).mean()
+signals['long_ma'] = data['Close'].rolling(window=long_window).mean()
+signals['signal'] = np.where(signals['short_ma'] > signals['long_ma'], 1.0, 0.0)
+```
 
 ### 🔹 RSI (Relative Strength Index)
 \[
