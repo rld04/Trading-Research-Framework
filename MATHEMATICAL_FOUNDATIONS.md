@@ -279,6 +279,25 @@ $$Q_{\text{final}} = \min(Q_{\text{max,dollars}}, Q_{\text{max,risk}})$$
 This ensures positions are limited by BOTH absolute size AND potential loss.
 
 ---
+### 🔹 Stop Loss Logic
+
+**Trigger Condition:**
+
+$$\text{Stop Loss Triggered} = \begin{cases} 
+\text{True}, & \text{if } \frac{P_{\text{current}} - P_{\text{entry}}}{P_{\text{entry}}} \leq -\text{Stop Loss %} \\
+\text{False}, & \text{otherwise}
+\end{cases}$$
+
+Default: 5% stop loss
+
+**Implementation:**
+```python
+# See RiskManager.check_stop_loss()
+loss_pct = (current_price - entry_price) / entry_price
+triggered = loss_pct <= -self.stop_loss_pct
+```
+
+---
 ## IV. Strategy Logic
 
 ### 🔹 Moving Average Crossover
