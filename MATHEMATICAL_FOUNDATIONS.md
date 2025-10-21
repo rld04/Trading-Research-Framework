@@ -205,24 +205,55 @@ max_drawdown = drawdown.min() * 100
 ## III. Position Sizing
 
 ### 🔹 Risk-per-Trade
-\[
-\text{Risk per trade} = \text{entry price} \times \text{stop\_loss\_pct}
-\]
-\[
-\text{Position size} = \frac{\text{Portfolio value} \times \text{max\_portfolio\_risk}}{\text{Risk per trade}}
-\]
+**Risk Amount Per Trade:**
 
+$$\text{Risk}_{\text{trade}} = \text{Entry Price} \times \text{Stop Loss %}$$
+
+**Position Size (Shares):**
+
+$$Q = \left\lfloor \frac{V_{\text{portfolio}} \times \text{Max Portfolio Risk %}}{\text{Risk}_{\text{trade}}} \right\rfloor$$
+
+Where:
+- $Q$ = Number of shares to buy (integer)
+- $V_{\text{portfolio}}$ = Current portfolio value
+- Max Portfolio Risk % = Maximum percentage of portfolio to risk (default: 2%)
+- $\lfloor \cdot \rfloor$ = Floor function (round down to integer)
+
+**Example:**
+- Portfolio value: $100,000
+- Max portfolio risk: 2% = $2,000
+- Entry price: $100
+- Stop loss: 5% = $5 per share
+- Position size: $2,000 / $5 = **400 shares**
+
+**Implementation:**
+```python
+# See RiskManager.calculate_position_size()
+risk_dollars = portfolio_value * self.max_portfolio_risk
+stop_amount = self.stop_loss_pct * price
+shares_by_risk = int(risk_dollars / stop_amount)
+```
+
+---
 ### 🔹 Kelly Criterion (Conceptual)
-\[
-f^* = \frac{p(b + 1) - 1}{b}
-\]
-Used conceptually to guide proportional exposure and position scaling.
+**Formula:**
 
-### 🔹 Volatility-Based Sizing
-Positions are inversely scaled to volatility to maintain consistent portfolio risk:
-\[
-w_i = \frac{1 / \sigma_i}{\sum_{j=1}^{n} (1 / \sigma_j)}
-\]
+$$f^* = \frac{p(b + 1) - 1}{b} = \frac{p \cdot b - q}{b}$$
+
+Where:
+- $f^*$ = Optimal fraction of capital to risk
+- $p$ = Win probability
+- $q$ = Loss probability = $1 - p$
+- $b$ = Win/loss ratio (average win ÷ average loss)
+
+**Practical Application:**
+
+The framework uses a **modified Kelly approach** by:
+1. Capping position sizes at 20% of portfolio (prevents over-leverage)
+2. Using volatility as a proxy for uncertainty
+3. Applying both dollar-based and risk-based constraints
+
+**Why not pure Kelly?** Pure Kelly can be too aggressive and lead to excessive drawdowns. Professional traders typically use **fractional Kelly** (e.g., 25-50% of Kelly optimal) for more conservative sizing.
 
 ---
 
