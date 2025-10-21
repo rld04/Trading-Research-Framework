@@ -365,11 +365,52 @@ signals['long_ma'] = data['Close'].rolling(window=long_window).mean()
 signals['signal'] = np.where(signals['short_ma'] > signals['long_ma'], 1.0, 0.0)
 ```
 
-### 🔹 RSI (Relative Strength Index)
-\[
-\text{RSI} = 100 - \frac{100}{1 + \frac{\text{Avg Gain}}{\text{Avg Loss}}}
-\]
-Typical thresholds: **Buy below 30**, **Sell above 70**.
+### 🔹 Relative Strength Index (RSI)
+
+**Step 1: Calculate Price Changes**
+
+$$\Delta P_t = P_t - P_{t-1}$$
+
+**Step 2: Separate Gains and Losses**
+
+$$\text{Gain}_t = \begin{cases} \Delta P_t, & \text{if } \Delta P_t > 0 \\ 0, & \text{otherwise} \end{cases}$$
+
+$$\text{Loss}_t = \begin{cases} |\Delta P_t|, & \text{if } \Delta P_t < 0 \\ 0, & \text{otherwise} \end{cases}$$
+
+**Step 3: Calculate Average Gain and Loss**
+
+$$\text{Avg Gain} = \frac{1}{n}\sum_{i=1}^{n}\text{Gain}_i$$
+
+$$\text{Avg Loss} = \frac{1}{n}\sum_{i=1}^{n}\text{Loss}_i$$
+
+**Step 4: Calculate RS and RSI**
+
+$$\text{RS} = \frac{\text{Avg Gain}}{\text{Avg Loss}}$$
+
+$$\text{RSI} = 100 - \frac{100}{1 + \text{RS}}$$
+
+**Trading Signals:**
+
+$$\text{Signal} = \begin{cases}
++1 \text{ (Buy)}, & \text{if RSI} < 30 \text{ (Oversold)} \\
+-1 \text{ (Sell)}, & \text{if RSI} > 70 \text{ (Overbought)} \\
+0 \text{ (Hold)}, & \text{otherwise}
+\end{cases}$$
+
+**Interpretation:**
+- **RSI < 30**: Asset is oversold (potential buy opportunity)
+- **RSI > 70**: Asset is overbought (potential sell opportunity)
+- **RSI = 50**: Neutral (no directional bias)
+
+**Implementation:**
+```python
+# See TradingBot.rsi_strategy()
+delta = data['Close'].diff()
+gain = delta.where(delta > 0, 0).rolling(window=period).mean()
+loss = (-delta.where(delta < 0, 0)).rolling(window=period).mean()
+rs = gain / loss
+rsi = 100 - (100 / (1 + rs))
+```
 
 ### 🔹 Bollinger Bands
 \[
