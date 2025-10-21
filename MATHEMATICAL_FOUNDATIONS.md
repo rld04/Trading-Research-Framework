@@ -411,26 +411,54 @@ loss = (-delta.where(delta < 0, 0)).rolling(window=period).mean()
 rs = gain / loss
 rsi = 100 - (100 / (1 + rs))
 ```
-
+---
 ### 🔹 Bollinger Bands
-\[
-\text{Upper Band} = \text{MA}_n + k\sigma
-\]
-\[
-\text{Lower Band} = \text{MA}_n - k\sigma
-\]
 
-### 🔹 Momentum Indicator
-\[
-\text{Signal} =
-\begin{cases}
-1, & P_t > P_{t-k} \\
--1, & P_t < P_{t-k}
-\end{cases}
-\]
+**Middle Band (SMA):**
+
+$$\text{BB}_{\text{middle}} = \text{MA}_n$$
+
+**Upper Band:**
+
+$$\text{BB}_{\text{upper}} = \text{MA}_n + k \cdot \sigma_n$$
+
+**Lower Band:**
+
+$$\text{BB}_{\text{lower}} = \text{MA}_n - k \cdot \sigma_n$$
+
+Where:
+- $\text{MA}_n$ = n-period moving average
+- $\sigma_n$ = n-period standard deviation of price
+- $k$ = Number of standard deviations (typically 2)
+
+**Standard Deviation Calculation:**
+
+$$\sigma_n = \sqrt{\frac{1}{n}\sum_{i=0}^{n-1}(P_{t-i} - \text{MA}_n)^2}$$
+
+**Mean Reversion Signals:**
+
+$$\text{Signal} = \begin{cases}
++1 \text{ (Buy)}, & \text{if } P_t < \text{BB}_{\text{lower}} \\
+-1 \text{ (Sell)}, & \text{if } P_t > \text{BB}_{\text{upper}} \\
+0 \text{ (Hold)}, & \text{otherwise}
+\end{cases}$$
+
+**Interpretation:**
+- Price touching lower band → Potential reversal up
+- Price touching upper band → Potential reversal down
+- Bands widening → Increased volatility
+- Bands narrowing → Decreased volatility (potential breakout coming)
+
+**Implementation:**
+```python
+# See TradingBot.mean_reversion_strategy()
+signals['ma'] = data['Close'].rolling(window=window).mean()
+signals['std'] = data['Close'].rolling(window=window).std()
+signals['upper_band'] = signals['ma'] + (num_std * signals['std'])
+signals['lower_band'] = signals['ma'] - (num_std * signals['std'])
+```
 
 ---
-
 ## V. Portfolio Theory
 
 ### 🔹 Mean–Variance Optimization
