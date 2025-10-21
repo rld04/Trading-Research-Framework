@@ -459,6 +459,35 @@ signals['lower_band'] = signals['ma'] - (num_std * signals['std'])
 ```
 
 ---
+### 🔹 Momentum Indicator
+
+**Price Rate of Change:**
+
+$$\text{Momentum}(t) = \frac{P_t - P_{t-k}}{P_{t-k}} = \frac{P_t}{P_{t-k}} - 1$$
+
+Where:
+- $k$ = Lookback period (e.g., 20 days)
+
+**Trading Signals:**
+
+$$\text{Signal} = \begin{cases}
++1 \text{ (Buy)}, & \text{if Momentum} > \theta_{\text{buy}} \\
+-1 \text{ (Sell)}, & \text{if Momentum} < \theta_{\text{sell}} \\
+0 \text{ (Hold)}, & \text{otherwise}
+\end{cases}$$
+
+Where:
+- $\theta_{\text{buy}}$ = Positive threshold (e.g., +5%)
+- $\theta_{\text{sell}}$ = Negative threshold (e.g., -5%)
+
+**Implementation:**
+```python
+# See TradingBot.momentum_strategy()
+signals['momentum'] = data['Close'].pct_change(periods=lookback_period)
+signals['signal'] = np.where(signals['momentum'] > threshold, 1.0, 0.0)
+```
+
+---
 ## V. Portfolio Theory
 
 ### 🔹 Mean–Variance Optimization
