@@ -734,4 +734,36 @@ Used for theoretical maximum performance comparison only.
 - Reality: Some momentum and mean-reversion effects exist
 
 ---
+### 🔹 Risk Management Limitations
+
+**What's Covered:**
+- ✅ Position sizing
+- ✅ Stop losses
+- ✅ Take profits
+- ✅ Portfolio-level risk limits
+
+**What's NOT Covered:**
+- ❌ Liquidity risk (assumes you can always exit)
+- ❌ Counterparty risk
+- ❌ Regulatory changes
+- ❌ Black swan events (tail risk beyond normal volatility)
+- ❌ Correlation breakdown in crises (correlations → 1 during crashes)
+
+---
+### 🔹 Model Risk
+
+**Overfitting Risk:**
+- Strategy parameters optimized on historical data may not work going forward
+- **Mitigation:** Use walk-forward testing, out-of-sample validation
+
+**Data Quality:**
+- Yahoo Finance data may have errors, missing values, or survivorship bias
+- **Mitigation:** Data validation checks in code
+
+**Regime Changes:**
+- Market structure changes over time (algorithms, regulations, technology)
+- **Mitigation:** Regular revalidation, adaptive parameters
+
+---
+
 📘 *These formulas and concepts collectively form the quantitative foundation of MTC Trading v1.0, ensuring that every backtest reflects both mathematical rigor and real-market behavior.*
