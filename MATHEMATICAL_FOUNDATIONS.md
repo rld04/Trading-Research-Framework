@@ -572,7 +572,39 @@ $$\rho_{ij} = \frac{\text{Cov}(R_i, R_j)}{\sigma_i \cdot \sigma_j}$$
 - Target: $\rho < 0.7$ between major holdings
 
 ---
+## 🔹 Mean–Variance Optimization (Markowitz)
 
+**Objective:** Maximize expected return for a given level of risk.
+
+**Optimization Problem:**
+
+$$\max_{\mathbf{w}} \left[ \mathbf{w}^T \mathbf{\mu} - \frac{\lambda}{2} \mathbf{w}^T \Sigma \mathbf{w} \right]$$
+
+Subject to:
+$$\sum_{i=1}^{n} w_i = 1 \quad \text{(weights sum to 1)}$$
+$$w_i \geq 0 \quad \text{(no short selling)}$$
+
+Where:
+- $\mathbf{\mu}$ = Vector of expected returns
+- $\lambda$ = Risk aversion parameter
+- Higher $\lambda$ → More risk-averse (prefer lower variance)
+
+**Simplified Implementation (Risk-Adjusted Scoring):**
+
+$$\text{Score}_i = \frac{E[R_i]}{\sigma_i}$$
+
+$$w_i = \frac{\text{Score}_i}{\sum_{j=1}^{n}\text{Score}_j}$$
+
+**Implementation:**
+```python
+# See PortfolioManager.optimize_portfolio_weights()
+mean_returns = returns_df.mean() * 252  # Annualized
+volatilities = np.sqrt(np.diag(cov_matrix))
+scores = mean_returns.values / volatilities  # Sharpe-like ratio
+weights = scores / scores.sum()
+```
+
+---
 ## VI. Practical Considerations
 
 ### 🔹 Transaction Costs
