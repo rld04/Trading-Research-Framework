@@ -623,19 +623,57 @@ allocations = {t: iv/total for t, iv in inv_vols.items()}
 ```
 
 ---
-## VI. Practical Considerations
-
+## VI. Execution Model
 ### 🔹 Transaction Costs
-Applied as:
-\[
-\text{Cost} = \text{Trade Value} \times \text{Commission Rate}
-\]
 
+**Total Execution Cost:**
+
+$$\text{Cost}_{\text{total}} = \text{Trade Value} \times (\text{Commission} + \text{Slippage})$$
+
+**Buy Transaction:**
+
+$$\text{Cash Out} = Q \times P_{\text{entry}} \times (1 + c + s)$$
+
+**Sell Transaction:**
+
+$$\text{Cash In} = Q \times P_{\text{exit}} \times (1 - c - s)$$
+
+Where:
+- $Q$ = Quantity (shares)
+- $P$ = Price per share
+- $c$ = Commission rate (default: 0.1% = 0.001)
+- $s$ = Slippage rate (default: 0.1% = 0.001)
+
+**Implementation:**
+```python
+# See TradingBot.backtest()
+# Buy
+cost = shares * price * (1 + commission + slippage)
+cash -= cost
+
+# Sell
+proceeds = shares * price * (1 - commission - slippage)
+cash += proceeds
+```
+
+---
 ### 🔹 Slippage Modeling
-\[
-\text{Executed Price} = \text{Market Price} \times (1 \pm \text{Slippage Rate})
-\]
+**Definition:** Difference between expected execution price and actual execution price.
 
+**Linear Slippage Model:**
+
+$$P_{\text{executed}} = P_{\text{market}} \times (1 + \epsilon \cdot \text{direction})$$
+
+Where:
+- $\epsilon$ = Slippage rate (default: 0.1%)
+- direction = +1 for buys (pay more), -1 for sells (receive less)
+
+**Why model slippage?**
+- Market orders don't execute at exact quoted prices
+- Bid-ask spread causes execution costs
+- Large orders can move the market against you
+
+---
 ### 🔹 Look-Ahead Bias Prevention
 Ensured by executing signals on the **next bar** when in `REALISTIC` mode:
 \[
