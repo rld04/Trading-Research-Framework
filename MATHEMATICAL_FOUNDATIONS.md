@@ -501,16 +501,6 @@ Where:
 - $n$ = Number of assets
 
 ---
-### 🔹 Mean–Variance Optimization
-\[
-E[R_p] = \sum_{i=1}^{n} w_i E[R_i]
-\]
-\[
-\sigma_p^2 = w^T \Sigma w
-\]
-where \( w \) is the weight vector and \( \Sigma \) is the covariance matrix of asset returns.
-
----
 ### 🔹 Portfolio Variance
 
 **Variance Formula:**
@@ -603,6 +593,7 @@ volatilities = np.sqrt(np.diag(cov_matrix))
 scores = mean_returns.values / volatilities  # Sharpe-like ratio
 weights = scores / scores.sum()
 ```
+
 ---
 ### 🔹 Risk Parity Allocation
 
