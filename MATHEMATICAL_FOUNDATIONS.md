@@ -675,11 +675,30 @@ Where:
 
 ---
 ### 🔹 Look-Ahead Bias Prevention
-Ensured by executing signals on the **next bar** when in `REALISTIC` mode:
-\[
-\text{Trade}_{t+1} = \text{Signal at } t
-\]
+**Realistic Mode (Default):**
+
+$$\text{Trade Execution Time} = t + 1$$
+$$\text{Signal Generation Time} = t$$
+
+**Signal Shift:**
+```python
+# Shift signals by 1 period
+signals['positions'] = signals['signal'].diff().shift(1).fillna(0)
+```
+
+**Why this matters:**
+- You can't trade on today's close USING today's close
+- Real trading requires time to process signals and place orders
+- Prevents artificially inflated backtest results
+
+**Optimistic Mode (Research Only):**
+
+$$\text{Trade Execution Time} = t$$
+$$\text{Signal Generation Time} = t$$
+
+Used for theoretical maximum performance comparison only.
 
 ---
+## VII. Assumptions & Limitations
 
 📘 *These formulas and concepts collectively form the quantitative foundation of MTC Trading v1.0, ensuring that every backtest reflects both mathematical rigor and real-market behavior.*
