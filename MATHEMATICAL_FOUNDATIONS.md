@@ -700,5 +700,38 @@ Used for theoretical maximum performance comparison only.
 
 ---
 ## VII. Assumptions & Limitations
+### 🔹 Market Assumptions
 
+**What We Assume:**
+1. **Liquidity:** Infinite liquidity at quoted prices (unrealistic for large orders)
+2. **Market Impact:** No market impact from our trades (realistic for small accounts)
+3. **Continuous Trading:** Can enter/exit at any daily close (ignores intraday dynamics)
+4. **No Gaps:** No overnight gap risk modeling
+5. **Perfect Execution:** Orders always fill (ignores partial fills, rejected orders)
+
+**What We DON'T Assume:**
+- ❌ Future knowledge (look-ahead bias prevented)
+- ❌ Perfect market timing
+- ❌ Zero transaction costs (commission and slippage modeled)
+- ❌ Normally distributed returns (use robust metrics like Sortino)
+
+---
+### 🔹 Statistical Assumptions
+
+**Return Distributions:**
+- Many metrics (Sharpe, volatility) assume **normal distribution**
+- Real returns exhibit:
+  - **Fat tails** (extreme events more common than normal distribution predicts)
+  - **Skewness** (asymmetric upside/downside)
+  - **Time-varying volatility** (volatility clusters)
+
+**Stationarity:**
+- Assumes statistical properties remain constant over time
+- Reality: Market regimes change (bull, bear, crisis)
+
+**Independence:**
+- Assumes returns are independent (no serial correlation)
+- Reality: Some momentum and mean-reversion effects exist
+
+---
 📘 *These formulas and concepts collectively form the quantitative foundation of MTC Trading v1.0, ensuring that every backtest reflects both mathematical rigor and real-market behavior.*
