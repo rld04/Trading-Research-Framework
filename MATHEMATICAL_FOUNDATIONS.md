@@ -765,5 +765,31 @@ Used for theoretical maximum performance comparison only.
 - **Mitigation:** Regular revalidation, adaptive parameters
 
 ---
+## VIII. References
+### 📚 Academic Papers
 
+1. **Sharpe, W. F. (1994)**  
+   *"The Sharpe Ratio"*  
+   Journal of Portfolio Management, Fall 1994  
+   → Foundational paper on risk-adjusted return measurement
+
+2. **Sortino, F. A. & Price, L. N. (1994)**  
+   *"Performance Measurement in a Downside Risk Framework"*  
+   Journal of Investing, 3(3), 59-64  
+   → Introduced downside deviation as alternative to standard deviation
+
+3. **Markowitz, H. (1952)**  
+   *"Portfolio Selection"*  
+   The Journal of Finance, 7(1), 77-91  
+   → Modern Portfolio Theory foundation
+
+4. **Kelly, J. L. (1956)**  
+   *"A New Interpretation of Information Rate"*  
+   Bell System Technical Journal, 35(4), 917-926  
+   → Kelly Criterion for optimal position sizing
+
+5. **Maillard, S., Roncalli, T., & Teïletche, J. (2010)**  
+   *"The Properties of Equally Weighted Risk Contribution Portfolios"*  
+   Journal of Portfolio Management, 36(4), 60-70  
+   → Risk parity allocation methodology
 📘 *These formulas and concepts collectively form the quantitative foundation of MTC Trading v1.0, ensuring that every backtest reflects both mathematical rigor and real-market behavior.*
