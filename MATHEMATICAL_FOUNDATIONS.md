@@ -603,6 +603,33 @@ volatilities = np.sqrt(np.diag(cov_matrix))
 scores = mean_returns.values / volatilities  # Sharpe-like ratio
 weights = scores / scores.sum()
 ```
+---
+### 🔹 Risk Parity Allocation
+
+**Concept:** Allocate capital so each asset contributes equally to portfolio risk.
+
+**Risk Contribution:**
+
+$$RC_i = w_i \cdot \frac{\partial \sigma_p}{\partial w_i} = w_i \cdot \frac{(\Sigma \mathbf{w})_i}{\sigma_p}$$
+
+**Equal Risk Contribution:**
+
+$$RC_1 = RC_2 = \cdots = RC_n = \frac{\sigma_p^2}{n}$$
+
+**Simplified Inverse Volatility Weighting:**
+
+$$w_i = \frac{1/\sigma_i}{\sum_{j=1}^{n}(1/\sigma_j)}$$
+
+This approximation works well when correlations are similar across assets.
+
+**Implementation:**
+```python
+# See PortfolioManager.calculate_allocations() - risk_parity method
+volatilities = {ticker: returns.std() for ticker, returns in returns_dict.items()}
+inv_vols = {t: 1/v for t, v in volatilities.items()}
+total = sum(inv_vols.values())
+allocations = {t: iv/total for t, iv in inv_vols.items()}
+```
 
 ---
 ## VI. Practical Considerations
