@@ -489,7 +489,18 @@ signals['signal'] = np.where(signals['momentum'] > threshold, 1.0, 0.0)
 
 ---
 ## V. Portfolio Theory
+### 🔹 Expected Portfolio Return
 
+**Weighted Average of Asset Returns:**
+
+$$E[R_p] = \sum_{i=1}^{n} w_i \cdot E[R_i]$$
+
+Where:
+- $w_i$ = Weight of asset $i$ in portfolio ($\sum w_i = 1$)
+- $E[R_i]$ = Expected return of asset $i$
+- $n$ = Number of assets
+
+---
 ### 🔹 Mean–Variance Optimization
 \[
 E[R_p] = \sum_{i=1}^{n} w_i E[R_i]
@@ -498,6 +509,27 @@ E[R_p] = \sum_{i=1}^{n} w_i E[R_i]
 \sigma_p^2 = w^T \Sigma w
 \]
 where \( w \) is the weight vector and \( \Sigma \) is the covariance matrix of asset returns.
+
+---
+### 🔹 Portfolio Variance
+
+**Variance Formula:**
+
+$$\sigma_p^2 = \sum_{i=1}^{n}\sum_{j=1}^{n} w_i w_j \sigma_i \sigma_j \rho_{ij}$$
+
+**Matrix Notation:**
+
+$$\sigma_p^2 = \mathbf{w}^T \Sigma \mathbf{w}$$
+
+Where:
+- $\mathbf{w}$ = Column vector of weights $[w_1, w_2, \dots, w_n]^T$
+- $\Sigma$ = Covariance matrix
+- $\rho_{ij}$ = Correlation between assets $i$ and $j$
+
+**Portfolio Standard Deviation:**
+
+$$\sigma_p = \sqrt{\mathbf{w}^T \Sigma \mathbf{w}}$$
+---
 
 ### 🔹 Correlation Matrix
 \[
