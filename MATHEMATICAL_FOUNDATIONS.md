@@ -529,19 +529,47 @@ Where:
 **Portfolio Standard Deviation:**
 
 $$\sigma_p = \sqrt{\mathbf{w}^T \Sigma \mathbf{w}}$$
+
 ---
+### 🔹 Covariance Matrix
 
-### 🔹 Correlation Matrix
-\[
-\rho_{ij} = \frac{\text{Cov}(R_i, R_j)}{\sigma_i \sigma_j}
-\]
+**Covariance Calculation:**
 
-### 🔹 Risk Parity Allocation
-Balances risk contribution across assets:
-\[
-RC_i = w_i \times (\Sigma w)_i
-\]
-Weights are adjusted so that each \( RC_i \) contributes equally to portfolio variance.
+$$\text{Cov}(R_i, R_j) = \frac{1}{T-1}\sum_{t=1}^{T}(R_{i,t} - \bar{R}_i)(R_{j,t} - \bar{R}_j)$$
+
+**Matrix Form:**
+
+$$\Sigma = \begin{bmatrix}
+\sigma_1^2 & \text{Cov}(R_1,R_2) & \cdots & \text{Cov}(R_1,R_n) \\
+\text{Cov}(R_2,R_1) & \sigma_2^2 & \cdots & \text{Cov}(R_2,R_n) \\
+\vdots & \vdots & \ddots & \vdots \\
+\text{Cov}(R_n,R_1) & \text{Cov}(R_n,R_2) & \cdots & \sigma_n^2
+\end{bmatrix}$$
+
+**Implementation:**
+```python
+# See PortfolioManager.calculate_correlation_matrix()
+returns_df = pd.DataFrame(returns_dict).dropna()
+correlation_matrix = returns_df.corr()
+covariance_matrix = returns_df.cov()
+```
+
+---
+### 🔹 Correlation Coefficient
+
+**Definition:**
+
+$$\rho_{ij} = \frac{\text{Cov}(R_i, R_j)}{\sigma_i \cdot \sigma_j}$$
+
+**Properties:**
+- Range: $-1 \leq \rho_{ij} \leq 1$
+- $\rho_{ij} = 1$: Perfect positive correlation
+- $\rho_{ij} = 0$: No linear correlation
+- $\rho_{ij} = -1$: Perfect negative correlation
+
+**Portfolio Diversification:**
+- Lower correlations → Better diversification
+- Target: $\rho < 0.7$ between major holdings
 
 ---
 
