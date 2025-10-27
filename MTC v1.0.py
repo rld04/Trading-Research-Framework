@@ -22,7 +22,6 @@ from dataclasses import dataclass
 from enum import Enum
 warnings.filterwarnings('ignore')
 
-
 # ==================== CONFIGURATION ====================
 
 class StrategyMode(Enum):
@@ -42,7 +41,6 @@ class BacktestConfig:
     def __post_init__(self):
         self.commission = max(0.0, float(self.commission))
         self.slippage = max(0.0, float(self.slippage))
-
 
 # ==================== RISK MANAGER ====================
 
@@ -195,7 +193,6 @@ class RiskManager:
         if not self.risk_events:
             return pd.DataFrame()
         return pd.DataFrame(self.risk_events)
-
 
 # ==================== PORTFOLIO MANAGER ====================
 
@@ -418,7 +415,6 @@ class PortfolioManager:
             weight = 1.0 / len(valid) if valid else 0
             return {ticker: weight for ticker in valid}
 
-
 # ==================== TRADING BOT ====================
 
 class TradingBot:
@@ -523,7 +519,7 @@ class TradingBot:
             signals['positions'] = signals['signal'].diff()
 
         return signals
-
+        
     # ==================== STRATEGIES ====================
 
     def moving_average_crossover(self, short_window: int = 50, long_window: int = 200) -> pd.DataFrame:
@@ -1065,7 +1061,6 @@ class TradingBot:
 
         return fig
 
-
 # ==================== INTERACTIVE MENU ====================
 
 def display_menu():
@@ -1506,4 +1501,5 @@ if __name__ == "__main__":
         main()
     except Exception as e:
         print(f"\n❌ Fatal error: {e}")
+
         print("Program terminated.")
