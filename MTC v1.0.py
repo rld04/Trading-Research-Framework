@@ -1,6 +1,6 @@
 """
 MTC Trading v1.0 
-Advanced algorithmic trading backtesting system
+Algorithmic trading backtesting system
 
 Features:
 - Multiple trading strategies with proper signal timing
@@ -1503,3 +1503,4 @@ if __name__ == "__main__":
         print(f"\n❌ Fatal error: {e}")
 
         print("Program terminated.")
+
